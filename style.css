@@ -1,0 +1,120 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	background-color: #faf8ef;
+	font-family: 'Roboto', sans-serif;
+}
+
+canvas {
+	background-color: #cfc0b0;
+	border: 5px solid #9e9e9e;
+	border-radius: 10px;
+}
+
+.game-container {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.score-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100px;
+}
+
+.score-container {
+	border: 5px solid #9e9e9e;
+	border-radius: 40px;
+	background-color: #d9d9d9;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 16px 40px;
+	font-size: 40px;
+	min-width: 310px;
+	height: 80px;
+	letter-spacing: 0 !important;
+	text-transform: uppercase; 
+}
+
+.game-message-container {
+	display: none;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.game-message-container.game-won, 
+.game-message-container.game-over {
+	display: flex;
+}
+
+.game-message-dialog {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background-color: rgba(249, 246, 242, 0.95);
+	padding: 24px;
+	border-radius: 6px;
+}
+
+.game-message-container .game-message-dialog .game-message {
+	font-weight: bold;
+	text-align: center;
+	font-size: 60px;
+	margin-bottom: 14px;
+	color: #2b0101;
+}
+
+.game-message-container.game-won .game-message-dialog .restart-btn {
+	background: #6bbb6b;
+}
+
+.game-message-container.game-over .game-message-dialog .restart-btn {
+	background: #FC6E51;
+}
+    
+.game-won {
+	background-color: rgba(61, 158, 51, 0.1);
+}
+
+.game-over {
+	background-color: rgba(255, 8, 0, 0.1);
+}
+
+.restart-btn {
+	cursor: pointer;
+	padding: 16px 42px;
+	border: none;
+	border-radius: 3px;
+	box-shadow: 0px 0px 12px -2px rgba(0,0,0,0.5);
+	line-height: 1.25;
+	text-decoration: none;
+	user-select: none;
+	color: white;
+	font-size: 16px;
+	letter-spacing: .08em;
+	text-transform: uppercase;
+	position: relative;
+	overflow: hidden;
+}
+
+.hidden {
+	display: none !important;
+}

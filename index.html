@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<title>2048 Game</title>
+	</head>
+	<body>
+		<div class="game-container">
+			<div class="score-container"></div>
+
+			<div class="game-field-container">
+				<canvas id="gameCanvas" width="400" height="400"></canvas>
+			</div>
+		</div>
+
+		<div class="game-message-container">
+			<div class="game-message-dialog">
+				<p class="game-message"></p>
+				<button id="restart-btn" class="restart-btn">Ok</a>
+			</div>
+		</div>
+
+		<script type="module" src="./js/game.js"></script>
+		<script type="module" src="./js/tile.js"></script>
+		<script type="module" src="./js/score.js"></script>
+		<script type="module" src="./js/constans.js"></script>
+		<script type="module" src="./js/message-dialog.js"></script>
+		<script type="module" src="./js/movement-controls.js"></script>
+	</body>
+</html>
