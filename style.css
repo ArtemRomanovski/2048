@@ -47,7 +47,7 @@ canvas {
 	min-width: 310px;
 	height: 80px;
 	letter-spacing: 0 !important;
-	text-transform: uppercase; 
+	text-transform: uppercase;
 }
 
 .game-message-container {
@@ -59,7 +59,8 @@ canvas {
 	justify-content: center;
 	align-items: center;
 }
-.game-message-container.game-won, 
+
+.game-message-container.game-won,
 .game-message-container.game-over {
 	display: flex;
 }
@@ -89,7 +90,7 @@ canvas {
 .game-message-container.game-over .game-message-dialog .restart-btn {
 	background: #FC6E51;
 }
-    
+
 .game-won {
 	background-color: rgba(61, 158, 51, 0.1);
 }

@@ -9,7 +9,7 @@ export class MessageDialog {
 
 		this.messageContainer.classList.remove('hidden');
 		this.messageContainer.classList.add(type);
-  		this.messageContainer.getElementsByTagName('p')[0].textContent = message;
+		this.messageContainer.getElementsByTagName('p')[0].textContent = message;
 	}
 
 	clearMessage() {
@@ -18,6 +18,7 @@ export class MessageDialog {
 	}
 
 	close() {
+		this.clearMessage();
 		this.messageContainer.classList.add('hidden');
 	}
 }

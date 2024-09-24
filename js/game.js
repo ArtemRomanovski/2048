@@ -3,7 +3,6 @@ import { MovementControl } from './movement-controls.js';
 
 import { Tile } from './tile.js';
 import { Score } from './score.js';
-import { colors } from './constans.js';
 
 function restartGame() {
 	game.restart();
@@ -12,14 +11,9 @@ function restartGame() {
 class GameField {
 	constructor(size = 4) {
 		this.size = size;
-		this.isAnimating = false;
-		this.moved = false;
-		this.winStatus = false;
-
 		this.messageDialog = new MessageDialog();
 		this.initControls = new MovementControl();
 		this.score = new Score();
-
 		this.initRestartControl();
 		this.setup();
 	}
@@ -29,20 +23,18 @@ class GameField {
 	}
 
 	restart() {
-		this.isAnimating = false;
-		this.moved = false;
-		this.winStatus = false;
-
 		this.score.resetScore();
 		this.messageDialog.close()
 		this.setup();
 	}
 
 	setup() {
+		this.isAnimating = false;
+		this.moved = false;
+		this.winStatus = false;
 		this.grid = this.createGrid();
 		this.score.updateScore();
 		this.initControls.updateStatus(true);
-
 		this.spawnTile();
 		this.spawnTile();
 		this.draw();
@@ -68,8 +60,6 @@ class GameField {
 			const { row, col } = emptyTiles[Math.floor(Math.random() * emptyTiles.length)];
 			this.grid[row][col] = new Tile(Math.random() > 0.9 ? 4 : 2);
 		}
-
-		emptyTiles.length = 0;
 	}
 
 	slideAndMerge(tiles) {
@@ -93,21 +83,20 @@ class GameField {
 		return tiles;
 	}
 
-	// TODO: change (have a bugs)
 	hasMoves() {
 		return this.grid.some((row, i) => {
 			return row.some((tile, j) => {
 				if (row[j + 1]) {
 					return tile.value === row[j + 1].value;
-				}
+				} 
 				if (this.grid[i + 1]) {
 					return tile.value === this.grid[i + 1][j].value;
 				}
 			});
-		})
+		});
 	}
 
-	hasEmptyTiles() {		
+	hasEmptyTiles() {
 		return this.grid.some(((colums) => {
 			return colums.some((tile) => tile.isEmpty());
 		}));
@@ -118,6 +107,7 @@ class GameField {
 			return;
 		}
 
+		this.initControls.updateStatus(false);
 		this.isAnimating = true;
 		this.moved = false;
 		this.resetMergeStatus();
@@ -149,7 +139,6 @@ class GameField {
 						this.moved = true;
 					}
 					this.grid[i][j] = newRowOrCol[j];
-
 				} else {
 					if (this.grid[j][i].value !== newRowOrCol[j].value) {
 						this.moved = true;
@@ -175,13 +164,14 @@ class GameField {
 
 			this.isAnimating = false;
 		}
+
+		this.initControls.updateStatus(true);
 	}
 
 	setGameStatus(success) {
 		this.initControls.updateStatus(false);
 		this.messageDialog.getMessage(success);
 	}
-
 
 	resetMergeStatus() {
 		for (let row of this.grid) {
@@ -200,42 +190,11 @@ class GameField {
 
 		for (let row = 0; row < this.size; row++) {
 			for (let col = 0; col < this.size; col++) {
-				this.drawTile(ctx, row, col, size);
+				const tile = this.grid[row][col];
+				tile.drawTile(ctx, tile, row, col, size);
 			}
 		}
 	}
-
-	drawTile(ctx, row, col, size) {
-		const tile = this.grid[row][col];
-		const radius = 10;
-		
-		if (tile.value) {
-			ctx.fillStyle = colors[tile.value] || '#3c3a32';
-
-			this.roundRect(ctx, col * size + 10, row * size + 10, size - 20, size - 20, radius);
-			
-			ctx.font = `bold ${size / 3}px Roboto`;
-			ctx.fillStyle = '#000000';
-			ctx.textAlign = 'center';
-			ctx.textBaseline = 'middle';
-			ctx.fillText(tile.value, col * size + size / 2, row * size + size / 2);
-		}
-	}
-
-	roundRect(ctx, x, y, width, height, radius) {
-		ctx.beginPath();
-		ctx.moveTo(x + radius, y);
-		ctx.lineTo(x + width - radius, y);
-		ctx.arcTo(x + width, y, x + width, y + radius, radius);
-		ctx.lineTo(x + width, y + height - radius);
-		ctx.arcTo(x + width, y + height, x + width - radius, y + height, radius);
-		ctx.lineTo(x + radius, y + height);
-		ctx.arcTo(x, y + height, x, y + height - radius, radius);
-		ctx.lineTo(x, y + radius);
-		ctx.arcTo(x, y, x + radius, y, radius);
-		ctx.closePath();
-		ctx.fill();
-	}	
 }
 
 export const game = new GameField();

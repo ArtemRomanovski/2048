@@ -8,9 +8,8 @@ export class Score {
 		if (value) {
 			this.score += value;
 		}
-
-        this.scoreContainer.innerHTML = `Счёт: ${this.score}`;
-    }
+		this.scoreContainer.innerHTML = `Счёт: ${this.score}`;
+	}
 
 	resetScore() {
 		this.score = 0;

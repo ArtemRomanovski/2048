@@ -3,7 +3,6 @@ import { game } from './game.js'
 export class MovementControl {
 	constructor() {
 		this.eventEnabled = true;
-
 		this.initKeyboard();
 		this.initSwipeControls();
 	}
